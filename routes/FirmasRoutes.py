@@ -75,9 +75,6 @@ def datos_usuario():
     except Exception as e:
         return jsonify({'ERROR': 'FALLA AL ENVIAR LA SOLICITUD'}), 500
 
-@app.route('/hola', methods=['GET'])
-def hola():
-    return "Holaaa"
 
 @app.route('/predict', methods=['POST'])
 def predecir_compatibilidad():
