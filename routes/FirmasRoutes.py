@@ -25,7 +25,7 @@ credenciales = {
 cred = credentials.Certificate(credenciales)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
-
+@app.route('/holaa', methods=['GET'])
 def holaa():
     return "holaA";
 
