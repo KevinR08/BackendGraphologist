@@ -98,7 +98,7 @@ def predecir_compatibilidad():
         personalidad_match = usuario_actual['predictPersonality'].upper()
         sexualidad_match = usuario_actual['predictSexuality'].upper()
         signo_match = usuario_actual['sign'].upper()
-        genero_actual = usuario_actual['genderUser'].lower()
+        #genero_actual = usuario_actual['genderUser'].lower()
 
         del usuarios[uid]
 
@@ -110,19 +110,19 @@ def predecir_compatibilidad():
                 genero_posible_match = usuarios[u]['genderUser'].lower()
 
                 # Verificar que sean géneros opuestos (por ejemplo, hombre-mujer)
-                if (genero_actual == 'hombre' and genero_posible_match == 'mujer') or (genero_actual == 'mujer' and genero_posible_match == 'hombre'):
+                #if (genero_actual == 'hombre' and genero_posible_match == 'mujer') or (genero_actual == 'mujer' and genero_posible_match == 'hombre'):
                     
                     # Calcular la compatibilidad
-                    if usuarios[u]['predictPersonality'].upper() == personalidad_match:
-                        reference_match_value += 8
-                    if usuarios[u]['predictSexuality'].upper() == sexualidad_match:
-                        reference_match_value += 1
-                    if usuarios[u]['sign'].upper() == signo_match:
-                        reference_match_value += 1
+                if usuarios[u]['predictPersonality'].upper() == personalidad_match:
+                    reference_match_value += 8
+                if usuarios[u]['predictSexuality'].upper() == sexualidad_match:
+                    reference_match_value += 1
+                if usuarios[u]['sign'].upper() == signo_match:                        
+                    reference_match_value += 1
 
-                    if max_match_value < reference_match_value:
-                        user_match_uid = str(u)
-                        max_match_value = reference_match_value
+                if max_match_value < reference_match_value:
+                    user_match_uid = str(u)
+                    max_match_value = reference_match_value
             
             reference_match_value = 0
 
