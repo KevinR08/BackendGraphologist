@@ -26,6 +26,9 @@ cred = credentials.Certificate(credenciales)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+def holaa():
+    return "holaA";
+
 def obtener_usuarios():
     try:
         usuarios_ref = db.collection('users')
