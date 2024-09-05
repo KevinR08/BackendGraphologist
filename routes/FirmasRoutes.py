@@ -25,9 +25,6 @@ credenciales = {
 cred = credentials.Certificate(credenciales)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
-@app.route('/holaa', methods=['GET'])
-def holaa():
-    return "holaA";
 
 def obtener_usuarios():
     try:
@@ -39,7 +36,6 @@ def obtener_usuarios():
         for doc in documentos:
             uid = doc.id
             datos = doc.to_dict()
-            print(datos)
             registros[uid] = datos
 
         return registros
@@ -79,6 +75,9 @@ def datos_usuario():
     except Exception as e:
         return jsonify({'ERROR': 'FALLA AL ENVIAR LA SOLICITUD'}), 500
 
+@app.route('/hola', methods=['GET'])
+def hola():
+    return "Holaaa"
 
 @app.route('/predict', methods=['POST'])
 def predecir_compatibilidad():
@@ -98,7 +97,6 @@ def predecir_compatibilidad():
         personalidad_match = usuario_actual['predictPersonality'].upper()
         sexualidad_match = usuario_actual['predictSexuality'].upper()
         signo_match = usuario_actual['sign'].upper()
-        #genero_actual = usuario_actual['genderUser'].lower()
 
         del usuarios[uid]
 
@@ -106,18 +104,12 @@ def predecir_compatibilidad():
         reference_match_value = 0
         max_match_value = 0
         for u in usuarios:
-            if all(clave in usuarios[u] for clave in ['predictPersonality', 'predictSexuality', 'sign', 'genderUser']):
-                genero_posible_match = usuarios[u]['genderUser'].lower()
-
-                # Verificar que sean géneros opuestos (por ejemplo, hombre-mujer)
-                #if (genero_actual == 'hombre' and genero_posible_match == 'mujer') or (genero_actual == 'mujer' and genero_posible_match == 'hombre'):
-                    
-                    # Calcular la compatibilidad
+            if all(clave in usuarios[u] for clave in ['predictPersonality', 'predictSexuality', 'sign']):
                 if usuarios[u]['predictPersonality'].upper() == personalidad_match:
                     reference_match_value += 8
                 if usuarios[u]['predictSexuality'].upper() == sexualidad_match:
                     reference_match_value += 1
-                if usuarios[u]['sign'].upper() == signo_match:                        
+                if usuarios[u]['sign'].upper() == signo_match:
                     reference_match_value += 1
 
                 if max_match_value < reference_match_value:
